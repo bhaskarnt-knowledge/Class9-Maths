@@ -2,179 +2,136 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Number Systems – Illustrated Concepts</title>
+  <title>Chapter 1: Number Systems – Concepts & Illustrations</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { font-family: Arial, sans-serif; background: #f6f8fa; margin:0; }
-    .container { max-width: 980px; margin: 32px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 32px; }
-    h1 { color: #2266aa; text-align: center; }
-    h2 { color: #2266aa; margin-top: 36px; }
-    .concept { margin-bottom: 38px; }
-    .svg-illus { display: block; margin: 18px auto; }
-    .caption { text-align: center; color: #888; font-size: 0.95em; }
-    .formula { background: #f9f9f9; border-left: 4px solid #2266aa; padding: 10px 16px; margin: 12px 0; font-family: 'Courier New', monospace; }
-    .tip { background: #e7f3fe; border-left: 4px solid #2196F3; padding: 12px; border-radius: 6px; margin: 24px 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f6f8fa; margin:0; }
+    .container { max-width: 980px; margin: 32px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.10); padding: 32px; }
+    h1 { color: #2266aa; text-align: center; margin-bottom: 8px;}
+    h2 { color: #2266aa; margin-top: 32px; }
+    h3 { color: #1769aa; margin-top: 20px; }
+    .concepts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 24px; margin-bottom: 32px; }
+    .concept-card { background: #f7fafc; border-radius: 10px; box-shadow: 0 1px 4px rgba(34,102,170,0.05); padding: 22px 18px 16px 18px; position: relative; }
+    .concept-card svg { display: block; margin: 0 auto 12px auto; }
+    .concept-title { font-weight: bold; color: #1769aa; font-size: 1.10em; margin-bottom: 6px;}
+    .concept-desc { color: #444; font-size: 1em; }
+    .formula { background: #f9f9f9; border-left: 4px solid #2266aa; padding: 10px 16px; margin: 12px 0 10px 0; font-family: 'Courier New', monospace; }
+    .venn-label { font-size:13px; }
+    .number-line { margin: 0 auto 8px auto; display: block; }
+    .collapsible { background: #e7f3fe; color: #2266aa; cursor: pointer; padding: 10px 18px; width: 100%; border: none; text-align: left; outline: none; font-size: 1.08em; border-radius: 6px; margin-top: 16px; margin-bottom: 0;}
+    .active, .collapsible:hover { background: #d0e6fa; }
+    .content { padding: 0 18px; display: none; overflow: hidden; background: #f9f9f9; border-radius: 0 0 6px 6px; }
+    .tip { background: #fffbe7; border-left: 4px solid #ffb300; padding: 10px; border-radius: 6px; margin: 24px 0; color: #7c6f00;}
     table { border-collapse: collapse; margin: 18px 0; width: 100%; }
     th, td { border: 1px solid #bbb; padding: 8px 10px; text-align: left; }
     th { background: #f2f2f2; }
-    .decimal-dot { width: 8px; height: 8px; background: #2266aa; border-radius: 50%; display: inline-block; margin: 0 2px; }
-    .decimal-dot.irr { background: #e53935; }
-    .pulse { animation: pulse 1.5s infinite; background: #ffb300; }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 #ffe082; }
-      70% { box-shadow: 0 0 0 10px rgba(255,224,130,0); }
-      100% { box-shadow: 0 0 0 0 rgba(255,224,130,0); }
+    @media (max-width: 700px) {
+      .container { padding: 12px; }
+      .concepts-grid { grid-template-columns: 1fr; }
     }
-    .video-demo, .gif-demo { display:block; margin:18px auto 8px auto; border-radius:8px; }
-    .venn-label { font-size:13px; }
   </style>
 </head>
 <body>
 <div class="container">
-  <h1>Number Systems – Illustrated Concepts</h1>
+  <h1>Chapter 1: Number Systems</h1>
+  <div style="text-align:center;color:#888;margin-bottom:18px;">Key Concepts, Graphs & Solved Examples</div>
 
-  <div class="concept">
-    <h2>1. Number System Hierarchy (Venn Diagram)</h2>
-    <svg class="svg-illus" width="500" height="210">
-      <ellipse cx="250" cy="105" rx="220" ry="90" fill="#e3f2fd" stroke="#2266aa" stroke-width="2"/>
-      <ellipse cx="170" cy="105" rx="120" ry="60" fill="#fffde7" stroke="#ffb300" stroke-width="2"/>
-      <ellipse cx="120" cy="105" rx="70" ry="35" fill="#e8f5e9" stroke="#43a047" stroke-width="2"/>
-      <ellipse cx="90" cy="105" rx="35" ry="18" fill="#fce4ec" stroke="#e53935" stroke-width="2"/>
-      <text x="75" y="110" class="venn-label" fill="#e53935">N</text>
-      <text x="105" y="140" class="venn-label" fill="#43a047">Z</text>
-      <text x="155" y="170" class="venn-label" fill="#ffb300">Q</text>
-      <text x="320" y="180" class="venn-label" fill="#2266aa">R</text>
-      <text x="370" y="60" class="venn-label" fill="#e53935">Irrational</text>
-      <text x="210" y="105" font-size="15" fill="#888">All Real Numbers</text>
-    </svg>
-    <div class="caption">(N ⊂ Z ⊂ Q ⊂ R; Irrational ⊂ R but not Q)</div>
-  </div>
-
-  <div class="concept">
-    <h2>2. Rational Numbers on the Number Line</h2>
-    <svg class="svg-illus" width="400" height="70">
-      <line x1="30" y1="35" x2="370" y2="35" stroke="#aaa" stroke-width="2"/>
-      <circle cx="50" cy="35" r="8" fill="#2266aa"/>
-      <circle cx="120" cy="35" r="8" fill="#2266aa"/>
-      <circle cx="200" cy="35" r="8" fill="#2266aa"/>
-      <circle cx="300" cy="35" r="8" fill="#2266aa"/>
-      <text x="45" y="55" font-size="13" fill="#2266aa">0</text>
-      <text x="115" y="55" font-size="13" fill="#2266aa">1/2</text>
-      <text x="195" y="55" font-size="13" fill="#2266aa">1</text>
-      <text x="295" y="55" font-size="13" fill="#2266aa">2</text>
-      <text x="10" y="20" font-size="13" fill="#888">Between any two rationals, infinitely many more exist.</text>
-    </svg>
-    <div>
-      <span class="decimal-dot"></span><span class="decimal-dot"></span><span class="decimal-dot"></span>
-      <span style="margin-left:8px;">e.g. 0.75 = 3/4</span>
+  <h2>Key Concepts at a Glance</h2>
+  <div class="concepts-grid">
+    <div class="concept-card">
+      <svg width="42" height="42"><circle cx="21" cy="21" r="18" fill="#e3f2fd"/><text x="11" y="28" font-size="20" fill="#2266aa">Q</text></svg>
+      <div class="concept-title">Rational Numbers</div>
+      <div class="concept-desc">Numbers expressible as <b>p/q</b>, where p, q are integers and q ≠ 0. Decimal expansion is terminating or repeating.</div>
+      <div class="formula">e.g. 3/4 = 0.75, 2/3 = 0.666…</div>
+    </div>
+    <div class="concept-card">
+      <svg width="42" height="42"><circle cx="21" cy="21" r="18" fill="#ffebee"/><text x="8" y="28" font-size="20" fill="#e53935">Irr</text></svg>
+      <div class="concept-title">Irrational Numbers</div>
+      <div class="concept-desc">Numbers not expressible as <b>p/q</b>. Decimal expansion is non-terminating, non-repeating.</div>
+      <div class="formula">e.g. √2 = 1.414213..., π = 3.14159...</div>
+    </div>
+    <div class="concept-card">
+      <svg width="42" height="42"><ellipse cx="21" cy="21" rx="18" ry="13" fill="#e8f5e9"/><text x="13" y="28" font-size="20" fill="#43a047">R</text></svg>
+      <div class="concept-title">Real Numbers</div>
+      <div class="concept-desc">All rational and irrational numbers together form the set of real numbers.</div>
+      <div class="formula">e.g. -7, 0, 1/2, √3, π</div>
+    </div>
+    <div class="concept-card">
+      <svg width="42" height="42"><rect x="10" y="10" width="22" height="22" fill="#fffde7" stroke="#ffb300" stroke-width="2"/><text x="16" y="28" font-size="18" fill="#ffb300">W</text></svg>
+      <div class="concept-title">Whole & Natural Numbers</div>
+      <div class="concept-desc">Natural: Counting numbers from 1. Whole: Natural numbers plus 0.</div>
+      <div class="formula">N: 1,2,3...<br>W: 0,1,2,3...</div>
+    </div>
+    <div class="concept-card">
+      <svg width="42" height="42"><rect x="5" y="18" width="32" height="6" fill="#bdbdbd"/><text x="10" y="16" font-size="16" fill="#888">Z</text></svg>
+      <div class="concept-title">Integers</div>
+      <div class="concept-desc">All positive & negative whole numbers, including 0.</div>
+      <div class="formula">..., -3, -2, -1, 0, 1, 2, 3, ...</div>
     </div>
   </div>
 
-  <div class="concept">
-    <h2>3. Irrational Numbers on the Number Line</h2>
-    <svg class="svg-illus" width="400" height="70">
-      <line x1="30" y1="35" x2="370" y2="35" stroke="#aaa" stroke-width="2"/>
-      <circle cx="90" cy="35" r="8" fill="#e53935"/>
-      <circle cx="180" cy="35" r="8" fill="#e53935"/>
-      <circle cx="320" cy="35" r="8" fill="#e53935"/>
-      <text x="75" y="55" font-size="13" fill="#e53935">√2</text>
-      <text x="165" y="55" font-size="13" fill="#e53935">π</text>
-      <text x="305" y="55" font-size="13" fill="#e53935">e</text>
-      <text x="10" y="20" font-size="13" fill="#888">Irrationals "fill the gaps" between rationals.</text>
-    </svg>
-    <img src="https://media.giphy.com/media/3o7TKxohxvCzQnHnI0/giphy.gif" width="120" alt="Irrational spiral GIF" class="gif-demo" title="Irrational numbers fill the number line"/>
-    <div class="caption">GIF: Spiral shows how irrationals never repeat or terminate</div>
+  <h2>Visual Hierarchy: Venn Diagram</h2>
+  <svg class="svg-illus" width="480" height="180">
+    <ellipse cx="250" cy="90" rx="200" ry="70" fill="#e3f2fd" stroke="#2266aa" stroke-width="2"/>
+    <ellipse cx="170" cy="90" rx="110" ry="45" fill="#fffde7" stroke="#ffb300" stroke-width="2"/>
+    <ellipse cx="120" cy="90" rx="60" ry="25" fill="#e8f5e9" stroke="#43a047" stroke-width="2"/>
+    <ellipse cx="90" cy="90" rx="30" ry="12" fill="#fce4ec" stroke="#e53935" stroke-width="2"/>
+    <text x="80" y="95" class="venn-label" fill="#e53935">N</text>
+    <text x="105" y="120" class="venn-label" fill="#43a047">Z</text>
+    <text x="155" y="150" class="venn-label" fill="#ffb300">Q</text>
+    <text x="300" y="160" class="venn-label" fill="#2266aa">R</text>
+    <text x="350" y="60" class="venn-label" fill="#e53935">Irrational</text>
+    <text x="200" y="90" font-size="15" fill="#888">All Real Numbers</text>
+  </svg>
+  <div class="caption" style="text-align:center;">N ⊂ Z ⊂ Q ⊂ R; Irrational numbers are outside Q but inside R.</div>
+
+  <h2>Number Line: Rational & Irrational Numbers</h2>
+  <svg class="number-line" width="420" height="70">
+    <line x1="30" y1="35" x2="390" y2="35" stroke="#aaa" stroke-width="2"/>
+    <circle cx="50" cy="35" r="8" fill="#2266aa"/>
+    <text x="45" y="55" font-size="13" fill="#2266aa">0</text>
+    <circle cx="110" cy="35" r="8" fill="#2266aa"/>
+    <text x="100" y="55" font-size="13" fill="#2266aa">1/2</text>
+    <circle cx="200" cy="35" r="8" fill="#e53935"/>
+    <text x="190" y="55" font-size="13" fill="#e53935">√2</text>
+    <circle cx="270" cy="35" r="8" fill="#2266aa"/>
+    <text x="260" y="55" font-size="13" fill="#2266aa">1</text>
+    <circle cx="340" cy="35" r="8" fill="#e53935"/>
+    <text x="330" y="55" font-size="13" fill="#e53935">π</text>
+    <text x="10" y="20" font-size="13" fill="#888">Rationals (blue), Irrationals (red)</text>
+  </svg>
+
+  <h2>Locating √13 on the Number Line (Pythagoras Construction)</h2>
+  <svg class="svg-illus" width="400" height="130">
+    <line x1="60" y1="100" x2="340" y2="100" stroke="#aaa" stroke-width="2"/>
+    <circle cx="120" cy="100" r="6" fill="#2266aa"/>
+    <text x="115" y="120" font-size="13" fill="#2266aa">3</text>
+    <line x1="120" y1="100" x2="120" y2="60" stroke="#43a047" stroke-width="2"/>
+    <circle cx="120" cy="60" r="6" fill="#43a047"/>
+    <text x="130" y="65" font-size="13" fill="#43a047">2</text>
+    <line x1="60" y1="100" x2="120" y2="60" stroke="#e53935" stroke-width="2"/>
+    <text x="100" y="80" font-size="13" fill="#e53935">√13</text>
+    <circle cx="180" cy="100" r="8" fill="#ffb300" class="pulse"/>
+    <text x="170" y="120" font-size="13" fill="#ffb300">Mark √13</text>
+  </svg>
+  <div class="caption">Construct OA=3, AB=2, then OB=√13 by Pythagoras</div>
+
+  <h2>Decimal Expansions: Rational vs. Irrational</h2>
+  <table>
+    <tr><th>Type</th><th>Decimal Expansion</th><th>Example</th></tr>
+    <tr><td>Rational</td><td>Terminating or repeating</td><td>0.5, 0.333...</td></tr>
+    <tr><td>Irrational</td><td>Non-terminating, non-repeating</td><td>√2, π</td></tr>
+  </table>
+  <div style="font-family:monospace;font-size:1.3em;">
+    Rational: 0.666... <span class="decimal-dot"></span><span class="decimal-dot"></span><span class="decimal-dot"></span>
+    <br>
+    Irrational: 1.414213... <span class="decimal-dot irr"></span><span class="decimal-dot irr"></span>
   </div>
 
-  <div class="concept">
-    <h2>4. Locating √13 on the Number Line (Pythagoras Construction)</h2>
-    <svg class="svg-illus" width="400" height="130">
-      <line x1="60" y1="100" x2="340" y2="100" stroke="#aaa" stroke-width="2"/>
-      <circle cx="120" cy="100" r="6" fill="#2266aa"/>
-      <text x="115" y="120" font-size="13" fill="#2266aa">3</text>
-      <line x1="120" y1="100" x2="120" y2="60" stroke="#43a047" stroke-width="2"/>
-      <circle cx="120" cy="60" r="6" fill="#43a047"/>
-      <text x="130" y="65" font-size="13" fill="#43a047">2</text>
-      <line x1="60" y1="100" x2="120" y2="60" stroke="#e53935" stroke-width="2"/>
-      <text x="100" y="80" font-size="13" fill="#e53935">√13</text>
-      <circle cx="180" cy="100" r="8" fill="#ffb300" class="pulse"/>
-      <text x="170" y="120" font-size="13" fill="#ffb300">Mark √13</text>
-    </svg>
-    <div class="caption">Construct OA=3, AB=2, then OB=√13 by Pythagoras</div>
-    <iframe class="video-demo" width="380" height="214" src="https://www.youtube.com/embed/Xw2D3pFqU1k" title="Locating Irrational Numbers on Number Line" frameborder="0" allowfullscreen></iframe>
-    <div class="caption">Short video: <a href="https://www.youtube.com/watch?v=Xw2D3pFqU1k" target="_blank">Locating Irrational Numbers</a></div>
-  </div>
-
-  <div class="concept">
-    <h2>5. Decimal Expansions: Rational vs. Irrational</h2>
-    <svg class="svg-illus" width="400" height="60">
-      <rect x="10" y="30" width="380" height="10" fill="#e3f2fd"/>
-      <circle cx="60" cy="35" r="7" fill="#2266aa"/>
-      <circle cx="160" cy="35" r="7" fill="#e53935"/>
-      <text x="45" y="25" font-size="13" fill="#2266aa">0.5</text>
-      <text x="145" y="25" font-size="13" fill="#e53935">√2</text>
-    </svg>
-    <div style="font-family:monospace;font-size:1.3em;">
-      Rational: 0.666... <span class="decimal-dot"></span><span class="decimal-dot"></span><span class="decimal-dot"></span>
-      <br>
-      Irrational: 1.414213... <span class="decimal-dot irr"></span><span class="decimal-dot irr"></span>
-    </div>
-    <iframe class="video-demo" width="380" height="214" src="https://www.youtube.com/embed/6Eam4kRVf3Y" title="Decimal Expansions of Real Numbers" frameborder="0" allowfullscreen></iframe>
-    <div class="caption">Short video: <a href="https://www.youtube.com/watch?v=6Eam4kRVf3Y" target="_blank">Decimal Expansions</a></div>
-  </div>
-
-  <div class="concept">
-    <h2>6. Rationalisation of Denominator (Graphical)</h2>
-    <svg class="svg-illus" width="400" height="60">
-      <rect x="10" y="30" width="380" height="10" fill="#fffde7"/>
-      <text x="20" y="25" font-size="15" fill="#ffb300">1/(√7–2)</text>
-      <text x="140" y="45" font-size="15" fill="#43a047">×</text>
-      <text x="170" y="25" font-size="15" fill="#43a047">(√7+2)/(√7+2)</text>
-      <text x="280" y="45" font-size="15" fill="#2266aa">= (√7+2)/3</text>
-    </svg>
-    <div class="formula">
-      \( \frac{1}{\sqrt{7}-2} \times \frac{\sqrt{7}+2}{\sqrt{7}+2} = \frac{\sqrt{7}+2}{7-4} = \frac{\sqrt{7}+2}{3} \)
-    </div>
-    <iframe class="video-demo" width="380" height="214" src="https://www.youtube.com/embed/2NwQJrJwT3I" title="Rationalisation (CBSE)" frameborder="0" allowfullscreen></iframe>
-    <div class="caption">Short video: <a href="https://www.youtube.com/watch?v=2NwQJrJwT3I" target="_blank">Rationalisation (CBSE)</a></div>
-  </div>
-
-  <div class="concept">
-    <h2>7. Laws of Exponents (Graphical Table)</h2>
-    <svg class="svg-illus" width="400" height="90">
-      <text x="10" y="25" font-size="16" fill="#2266aa">a<sup>p</sup> × a<sup>q</sup> = a<sup>p+q</sup></text>
-      <text x="10" y="45" font-size="16" fill="#2266aa">(a<sup>p</sup>)<sup>q</sup> = a<sup>pq</sup></text>
-      <text x="10" y="65" font-size="16" fill="#2266aa">a<sup>p</sup> × b<sup>p</sup> = (ab)<sup>p</sup></text>
-      <text x="10" y="85" font-size="16" fill="#2266aa">a<sup>p</sup> / a<sup>q</sup> = a<sup>p-q</sup></text>
-    </svg>
-    <iframe class="video-demo" width="380" height="214" src="https://www.youtube.com/embed/4pKXGkrJ3r0" title="Laws of Exponents" frameborder="0" allowfullscreen></iframe>
-    <div class="caption">Short video: <a href="https://www.youtube.com/watch?v=4pKXGkrJ3r0" target="_blank">Laws of Exponents</a></div>
-  </div>
-
-  <div class="concept">
-    <h2>8. Example: Decimal Expansion Animation</h2>
-    <div style="font-size:1.2em;margin-bottom:8px;">0.333... (Rational, Repeats)</div>
-    <div style="font-family:monospace;font-size:1.3em;">
-      0.
-      <span class="decimal-dot" style="animation: pulse 1s infinite;"></span>
-      <span class="decimal-dot" style="animation: pulse 1s 0.2s infinite;"></span>
-      <span class="decimal-dot" style="animation: pulse 1s 0.4s infinite;"></span>
-      3...
-    </div>
-    <div style="font-size:1.2em;margin-top:18px;">1.4142135... (Irrational, No Pattern)</div>
-    <div style="font-family:monospace;font-size:1.3em;">
-      1.4
-      <span class="decimal-dot irr" style="animation: pulse 2s infinite;"></span>
-      <span class="decimal-dot irr" style="animation: pulse 2s 0.3s infinite;"></span>
-      <span class="decimal-dot irr" style="animation: pulse 2s 0.6s infinite;"></span>
-      2135...
-    </div>
-  </div>
-
-  <h2>Formulas Section</h2>
+  <h2>Key Formulas</h2>
   <div class="formula">
     <ul>
-      <li>Rational number: <b>p/q</b>, q ≠ 0</li>
+      <li>Rational: <b>p/q</b>, q ≠ 0</li>
       <li>Product of surds: <b>√a × √b = √(ab)</b></li>
       <li>Quotient of surds: <b>√a / √b = √(a/b)</b></li>
       <li>Conjugate rationalisation: <b>1/(a-b) × (a+b)/(a+b) = (a+b)/(a²-b²)</b></li>
@@ -189,9 +146,57 @@
     </ul>
   </div>
 
+  <h2>Interactive: Solved Example</h2>
+  <button class="collapsible">Sample: Are there two irrationals whose sum and product are both rationals?</button>
+  <div class="content">
+    <div style="margin:12px 0;">
+      Yes. <b>(3 + √2)</b> and <b>(3 – √2)</b> are both irrational.<br>
+      Their sum = 6 (rational), product = 7 (rational).
+    </div>
+  </div>
+  <button class="collapsible">Sample: Is there a number x such that x² is irrational but x⁴ is rational?</button>
+  <div class="content">
+    <div style="margin:12px 0;">
+      Yes. Take x = <b>4<sup>1/4</sup></b>.<br>
+      x² = 2 (irrational), x⁴ = 4 (rational).
+    </div>
+  </div>
+  <button class="collapsible">Sample: Express 0.888... as p/q.</button>
+  <div class="content">
+    <div style="margin:12px 0;">
+      Let x = 0.888...<br>
+      10x = 8.888...<br>
+      10x – x = 8 ⇒ 9x = 8 ⇒ x = <b>8/9</b>
+    </div>
+  </div>
+  <button class="collapsible">Sample: Rationalise the denominator of 1/(√7–2).</button>
+  <div class="content">
+    <div style="margin:12px 0;">
+      Multiply numerator and denominator by (√7+2):<br>
+      <b>(√7+2)/3</b>
+    </div>
+  </div>
+  <button class="collapsible">Sample: Locate √13 on the number line.</button>
+  <div class="content">
+    <div style="margin:12px 0;">
+      Construct OA=3, AB=2 at right angles. OB=√13 by Pythagoras. Mark this length from O on the number line.
+    </div>
+  </div>
+
   <div class="tip">
-    <b>Tip:</b> Explore the SVG graphs and videos for each concept to reinforce your understanding!
+    <b>Tip:</b> Click each solved example to expand/collapse the solution!
   </div>
 </div>
+<script>
+  // Collapsible sections
+  document.querySelectorAll('.collapsible').forEach(function(btn){
+    btn.addEventListener('click', function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.display === "block") content.style.display = "none";
+      else content.style.display = "block";
+    });
+  });
+</script>
 </body>
 </html>
