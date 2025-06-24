@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Number Systems Visualizations</title>
+<style>
+  body { font-family: sans-serif; line-height: 1.6; margin: 20px; }
+  .section { margin-bottom: 40px; padding: 20px; border: 1px solid #eee; border-radius: 8px; }
+  h2 { color: #333; }
+  .number-line-container { width: 100%; height: 100px; position: relative; margin-top: 20px; overflow: hidden; }
+  .number-line { position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: #333; }
+  .tick { position: absolute; top: 40%; width: 1px; height: 20%; background: #333; }
+  .tick.major { height: 30%; background: #000; }
+  .label { position: absolute; top: 70%; transform: translateX(-50%); font-size: 0.9em; }
+  .point { position: absolute; top: 50%; width: 10px; height: 10px; background: red; border-radius: 50%; transform: translate(-50%, -50%); }
+  .point-label { position: absolute; top: 20%; transform: translateX(-50%); font-weight: bold; color: red; }
+  .gif-container { text-align: center; margin-top: 20px; }
+  .gif-container img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px; }
+  .math { font-family: 'Times New Roman', serif; font-size: 1.1em; }
+</style>
+</head>
+<body>
+
+  <h1>Visual Illustrative Use Cases for Number Systems</h1>
+
+  <div class="section">
+    <h2>1. Locating Irrational Numbers on the Number Line</h2>
+    <p>Visualizing the placement of irrational numbers like $\sqrt{2}$, $\sqrt{5}$, and $\sqrt{13}$ on the number line using the Pythagorean theorem.</p>
+    <p>This animation would demonstrate the construction of $\sqrt{13}$ as described in the chapter.</p>
+    <div class="gif-container">
+      <h3>Example: Locating $\sqrt{13}$</h3>
+      <p>Imagine an animated GIF showing the steps:</p>
+      <ol>
+        <li>Draw a number line.</li>
+        <li>Mark OA = 3 units from the origin (O).</li>
+        <li>Draw AB = 2 units perpendicular to OA at A.</li>
+        <li>Connect OB. By Pythagoras, $OB = \sqrt{3^2 + 2^2} = \sqrt{9+4} = \sqrt{13}$.</li>
+        <li>Use a compass with center O and radius OB to draw an arc intersecting the number line at C. Point C represents $\sqrt{13}$.</li>
+      </ol>
+      <img src="https://via.placeholder.com/600x300?text=Animated+GIF+of+Locating+sqrt(13)" alt="Animated GIF showing how to locate sqrt(13) on a number line using the Pythagorean theorem.">
+      <p><i>(Placeholder for an actual GIF demonstrating the process)</i></p>
+    </div>
+
+    <div class="gif-container">
+      <h3>Example: Locating $\sqrt{5}$ and $\sqrt{10}$</h3>
+      <p>Similar GIFs could show the construction of $\sqrt{5}$ (e.g., $2^2 + 1^2$) and $\sqrt{10}$ (e.g., $3^2 + 1^2$).</p>
+      <img src="https://via.placeholder.com/600x300?text=Animated+GIF+of+Locating+sqrt(5)" alt="Animated GIF showing how to locate sqrt(5) on a number line.">
+      <img src="https://via.placeholder.com/600x300?text=Animated+GIF+of+Locating+sqrt(10)" alt="Animated GIF showing how to locate sqrt(10) on a number line.">
+      <p><i>(Placeholders for GIFs demonstrating locating $\sqrt{5}$ and $\sqrt{10}$)</i></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>2. Decimal Expansions: Rational vs. Irrational Numbers</h2>
+    <p>Illustrating the difference between terminating/non-terminating recurring decimal expansions of rational numbers and non-terminating non-recurring decimal expansions of irrational numbers.</p>
+    <div class="gif-container">
+      <h3>Rational Number Example: $\frac{1}{3} = 0.333...$</h3>
+      <p>An animation could show the long division of 1 by 3, highlighting the repeating nature of the decimal.</p>
+      <img src="https://via.placeholder.com/600x300?text=Animated+GIF+of+1/3+Long+Division" alt="Animated GIF showing long division of 1 by 3 resulting in repeating 0.333...">
+      <p><i>(Placeholder for an actual GIF)</i></p>
+    </div>
+    <div class="gif-container">
+      <h3>Irrational Number Example: $\sqrt{2} = 1.41421356...$</h3>
+      <p>An animation could show the first few steps of calculating $\sqrt{2}$ (e.g., using the Babylonian method or long division for square roots) to emphasize its non-repeating, non-terminating nature.</p>
+      <img src="https://via.placeholder.com/600x300?text=Animated+GIF+of+sqrt(2)+Decimal+Expansion" alt="Animated GIF illustrating the non-repeating, non-terminating decimal expansion of sqrt(2).">
+      <p><i>(Placeholder for an actual GIF)</i></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>3. Operations on Real Numbers: Visualizing Simplification</h2>
+    <p>Using animated steps to show the simplification of expressions involving radicals, making the distributive property and rationalization clearer.</p>
+    <div class="gif-container">
+      <h3>Example: $(3\sqrt{5}-5\sqrt{2})(4\sqrt{5}+3\sqrt{2})$</h3>
+      <p>An animation could highlight each step of the multiplication and simplification process, as shown in Sample Question 3.</p>
+      <pre><code>
+        (3√5 - 5√2)(4√5 + 3√2)
+        = 3√5 * (4√5 + 3√2) - 5√2 * (4√5 + 3√2)  &lt;-- Highlight distributive property
+        = (12 * 5) + (9√10) - (20√10) - (15 * 2) &lt;-- Highlight individual multiplications
+        = 60 + 9√10 - 20√10 - 30               &lt;-- Combine terms
+        = 30 - 11√10                         &lt;-- Final simplified form
+      </code></pre>
+      <img src="https://via.placeholder.com/600x300?text=Animated+GIF+of+Radical+Multiplication" alt="Animated GIF showing step-by-step simplification of (3√5-5√2)(4√5+3√2).">
+      <p><i>(Placeholder for an actual GIF)</i></p>
+    </div>
+
+    <div class="gif-container">
+      <h3>Example: Rationalizing the Denominator $\frac{6}{3\sqrt{2}-2\sqrt{3}}$</h3>
+      <p>An animation could show the multiplication by the conjugate and the subsequent simplification, as shown in Sample Question 4.</p>
+      <pre><code>
+        (6 / (3√2 - 2√3)) * ((3√2 + 2√3) / (3√2 + 2√3)) &lt;-- Highlight multiplication by conjugate
+        = 6(3√2 + 2√3) / ((3√2)^2 - (2√3)^2)          &lt;-- Highlight difference of squares
+        = 6(3√2 + 2√3) / (18 - 12)
+        = 6(3√2 + 2√3) / 6
+        = 3√2 + 2√3
+      </code></pre>
+      <img src="https://via.placeholder.com/600x300?text=Animated+GIF+of+Rationalization" alt="Animated GIF showing step-by-step rationalization of the denominator of 6/(3√2-2√3).">
+      <p><i>(Placeholder for an actual GIF)</i></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>4. Laws of Exponents for Real Numbers</h2>
+    <p>Visualizing how exponents work, especially with fractional and negative powers, can be very helpful.</p>
+    <div class="gif-container">
+      <h3>Example: $(a^p)^q = a^{pq}$</h3>
+      <p>An animation could demonstrate this law with simple numbers, e.g., $(2^2)^3 = 2^6$. Show $2^2 = 4$, then $4^3 = 64$. Then show $2^{2 \times 3} = 2^6 = 64$. A grid of squares/cubes could illustrate this.</p>
+      <img src="https://via.placeholder.com/600x300?text=Animated+GIF+of+Exponent+Law+(ap)q" alt="Animated GIF illustrating the exponent law (ap)q = apq.">
+      <p><i>(Placeholder for an actual GIF)</i></p>
+    </div>
+    <div class="gif-container">
+      <h3>Example: $a^p \cdot a^q = a^{p+q}$</h3>
+      <p>An animation could show multiplying quantities with the same base, e.g., $2^3 \cdot 2^2 = (2 \cdot 2 \cdot 2) \cdot (2 \cdot 2) = 2^5$.</p>
+      <img src="https://via.placeholder.com/600x300?text=Animated+GIF+of+Exponent+Law+ap.aq" alt="Animated GIF illustrating the exponent law ap.aq = ap+q.">
+      <p><i>(Placeholder for an actual GIF)</i></p>
+    </div>
+  </div>
+
+</body>
+</html>
