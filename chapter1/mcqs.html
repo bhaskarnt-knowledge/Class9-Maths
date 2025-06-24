@@ -257,4 +257,20 @@ function downloadPDF(initials, dateStr, timeSpent) {
 // --- Email (manual, as attachment not supported in mailto) ---
 function mailtoPDF() {
   alert(
-    "Due to browser security, automatic email with PDF attachment is not possible
+    "Due to browser security, automatic email with PDF attachment is not possible.\n\n"+
+    "Please download the PDF report, then attach it manually to an email addressed to:\n\n"+
+    "bhaskarn.utilities@gmail.com, sobitha.utilities@gmail.com"
+  );
+  window.location.href = "mailto:bhaskarn.utilities@gmail.com,sobitha.utilities@gmail.com?subject=MCQ Quiz Report&body=Please find attached the quiz report PDF generated on the quiz page.";
+}
+
+// --- Reset for Try Again ---
+function resetQuiz() {
+  document.getElementById("mcqQuiz").reset && document.getElementById("mcqQuiz").reset();
+  renderQuiz();
+  startTimer();
+  document.getElementById("quiz-result").style.display = "none";
+}
+</script>
+</body>
+</html>
