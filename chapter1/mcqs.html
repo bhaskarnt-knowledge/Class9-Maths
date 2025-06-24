@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Number Systems – Interactive MCQ Quiz with Heatmap</title>
+  <title>Number Systems – MCQ Quiz with PDF Report & Timer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     body { font-family: Arial, sans-serif; background:#f6f8fa; margin:0; }
     .container { max-width: 900px; margin: 30px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 28px; }
@@ -27,9 +28,13 @@
     .heatmap-table { border-collapse: collapse; margin-top: 20px; width: 100%; }
     .heatmap-table th, .heatmap-table td { border: 1px solid #bbb; padding: 8px 10px; text-align: center; }
     .heatmap-table th { background: #f2f2f2; }
-    .heat-good { background: #c8e6c9; }      /* green */
-    .heat-average { background: #fff9c4; }   /* yellow */
-    .heat-weak { background: #ffcdd2; }      /* red */
+    .heat-good { background: #c8e6c9; }
+    .heat-average { background: #fff9c4; }
+    .heat-weak { background: #ffcdd2; }
+    .pdf-btn { margin-top: 16px; margin-right: 12px; }
+    .timer { font-size: 1.1em; color: #444; margin-bottom: 18px; }
+    .form-section { margin-bottom: 22px; }
+    .form-section label { font-weight: bold; }
   </style>
 </head>
 <body>
@@ -39,98 +44,30 @@
     <a href="../../index.html">All Chapters</a>
   </nav>
   <h1>Number Systems – Interactive MCQ Quiz</h1>
-  <form id="mcqQuiz">
-    <div class="mcq">
-      <b>1. Every rational number is</b>
-      <label><input type="radio" name="q1" value="A"> (A) a natural number</label>
-      <label><input type="radio" name="q1" value="B"> (B) an integer</label>
-      <label><input type="radio" name="q1" value="C"> (C) a real number</label>
-      <label><input type="radio" name="q1" value="D"> (D) a whole number</label>
-    </div>
-    <div class="mcq">
-      <b>2. Between two rational numbers</b>
-      <label><input type="radio" name="q2" value="A"> (A) there is no rational number</label>
-      <label><input type="radio" name="q2" value="B"> (B) there is exactly one rational number</label>
-      <label><input type="radio" name="q2" value="C"> (C) there are infinitely many rational numbers</label>
-      <label><input type="radio" name="q2" value="D"> (D) there are only rational numbers and no irrational numbers</label>
-    </div>
-    <div class="mcq">
-      <b>3. Decimal representation of a rational number cannot be</b>
-      <label><input type="radio" name="q3" value="A"> (A) terminating</label>
-      <label><input type="radio" name="q3" value="B"> (B) non-terminating</label>
-      <label><input type="radio" name="q3" value="C"> (C) non-terminating repeating</label>
-      <label><input type="radio" name="q3" value="D"> (D) non-terminating non-repeating</label>
-    </div>
-    <div class="mcq">
-      <b>4. The product of any two irrational numbers is</b>
-      <label><input type="radio" name="q4" value="A"> (A) always an irrational number</label>
-      <label><input type="radio" name="q4" value="B"> (B) always a rational number</label>
-      <label><input type="radio" name="q4" value="C"> (C) always an integer</label>
-      <label><input type="radio" name="q4" value="D"> (D) sometimes rational, sometimes irrational</label>
-    </div>
-    <div class="mcq">
-      <b>5. The decimal expansion of the number √2 is</b>
-      <label><input type="radio" name="q5" value="A"> (A) a finite decimal</label>
-      <label><input type="radio" name="q5" value="B"> (B) 1.41421</label>
-      <label><input type="radio" name="q5" value="C"> (C) non-terminating recurring</label>
-      <label><input type="radio" name="q5" value="D"> (D) non-terminating non-recurring</label>
-    </div>
-    <div class="mcq">
-      <b>6. Which of the following is irrational?</b>
-      <label><input type="radio" name="q6" value="A"> (A) 4/9</label>
-      <label><input type="radio" name="q6" value="B"> (B) 12/3</label>
-      <label><input type="radio" name="q6" value="C"> (C) √7</label>
-      <label><input type="radio" name="q6" value="D"> (D) 81</label>
-    </div>
-    <div class="mcq">
-      <b>7. Which of the following is irrational?</b>
-      <label><input type="radio" name="q7" value="A"> (A) 0.14</label>
-      <label><input type="radio" name="q7" value="B"> (B) 0.1416</label>
-      <label><input type="radio" name="q7" value="C"> (C) 0.1416</label>
-      <label><input type="radio" name="q7" value="D"> (D) 0.4014001400014...</label>
-    </div>
-    <div class="mcq">
-      <b>8. A rational number between 2 and 3 is</b>
-      <label><input type="radio" name="q8" value="A"> (A) 2+3/2</label>
-      <label><input type="radio" name="q8" value="B"> (B) 2×3/2</label>
-      <label><input type="radio" name="q8" value="C"> (C) 1.5</label>
-      <label><input type="radio" name="q8" value="D"> (D) 2.5</label>
-    </div>
-    <div class="mcq">
-      <b>9. The value of 1.999... in the form p/q is</b>
-      <label><input type="radio" name="q9" value="A"> (A) 19/10</label>
-      <label><input type="radio" name="q9" value="B"> (B) 1999/1000</label>
-      <label><input type="radio" name="q9" value="C"> (C) 2</label>
-      <label><input type="radio" name="q9" value="D"> (D) 1/9</label>
-    </div>
-    <div class="mcq">
-      <b>10. 2 + √3 is equal to</b>
-      <label><input type="radio" name="q10" value="A"> (A) 2√6</label>
-      <label><input type="radio" name="q10" value="B"> (B) 6</label>
-      <label><input type="radio" name="q10" value="C"> (C) 2 + √3</label>
-      <label><input type="radio" name="q10" value="D"> (D) 4√6</label>
-    </div>
-    <div class="mcq">
-      <b>11. 10/15 × 15/10 equals</b>
-      <label><input type="radio" name="q11" value="A"> (A) 6/5</label>
-      <label><input type="radio" name="q11" value="B"> (B) 5/6</label>
-      <label><input type="radio" name="q11" value="C"> (C) 1</label>
-      <label><input type="radio" name="q11" value="D"> (D) 25</label>
-    </div>
-    <div class="mcq">
-      <b>12. The number obtained on rationalising the denominator of 1/(√7 – 2) is</b>
-      <label><input type="radio" name="q12" value="A"> (A) (√7 + 2)/3</label>
-      <label><input type="radio" name="q12" value="B"> (B) (√7 – 2)/3</label>
-      <label><input type="radio" name="q12" value="C"> (C) (7 + 2)/3</label>
-      <label><input type="radio" name="q12" value="D"> (D) (7 – 2)/3</label>
-    </div>
-    <div class="mcq">
-      <b>13. 1/(9 – 8) is equal to</b>
-      <label><input type="radio" name="q13" value="A"> (A) 1</label>
-      <label><input type="radio" name="q13" value="B"> (B) 1/1</label>
-      <label><input type="radio" name="q13" value="C"> (C) 9</label>
-      <label><input type="radio" name="q13" value="D"> (D) 8</label>
-    </div>
-    <div class="mcq">
-      <b>14. After rationalising the denominator of 7/(3√3 – 2√2), we get the denominator as</b>
-      <label><input type
+  <div id="user-form" class="form-section">
+    <label for="user-name">Name:</label>
+    <input type="text" id="user-name" required style="font-size:1em;padding:4px;" />
+    <label for="quiz-date" style="margin-left:24px;">Date:</label>
+    <input type="date" id="quiz-date" required style="font-size:1em;padding:4px;" />
+    <button class="quiz-btn" onclick="startQuiz()">Start Quiz</button>
+  </div>
+  <div id="timer" class="timer" style="display:none;">Time: <span id="timer-span">00:00</span></div>
+  <form id="mcqQuiz" style="display:none;"></form>
+  <div id="quiz-result"></div>
+</div>
+<script>
+// --- Question bank with topics and answers ---
+const questionBank = [
+  {q:"Every rational number is",options:["a natural number","an integer","a real number","a whole number"],answer:2,topic:"Rational Numbers"},
+  {q:"Between two rational numbers",options:["there is no rational number","there is exactly one rational number","there are infinitely many rational numbers","there are only rational numbers and no irrational numbers"],answer:2,topic:"Rational Numbers"},
+  {q:"Decimal representation of a rational number cannot be",options:["terminating","non-terminating","non-terminating repeating","non-terminating non-repeating"],answer:3,topic:"Decimal Expansions"},
+  {q:"The product of any two irrational numbers is",options:["always an irrational number","always a rational number","always an integer","sometimes rational, sometimes irrational"],answer:3,topic:"Irrational Numbers"},
+  {q:"The decimal expansion of the number √2 is",options:["a finite decimal","1.41421","non-terminating recurring","non-terminating non-recurring"],answer:3,topic:"Irrational Numbers"},
+  {q:"Which of the following is irrational?",options:["4/9","12/3","√7","81"],answer:2,topic:"Irrational Numbers"},
+  {q:"Which of the following is irrational?",options:["0.14","0.1416","0.1416","0.4014001400014..."],answer:3,topic:"Irrational Numbers"},
+  {q:"A rational number between 2 and 3 is",options:["2+3/2","2×3/2","1.5","2.5"],answer:3,topic:"Rational Numbers"},
+  {q:"The value of 1.999... in the form p/q is",options:["19/10","1999/1000","2","1/9"],answer:2,topic:"Decimal Expansions"},
+  {q:"2 + √3 is equal to",options:["2√6","6","2 + √3","4√6"],answer:2,topic:"Operations on Real Numbers"},
+  {q:"10/15 × 15/10 equals",options:["6/5","5/6","1","25"],answer:2,topic:"Operations on Real Numbers"},
+  {q:"The number obtained on rationalising the denominator of 1/(√7 – 2) is",options:["(√7 + 2)/3","(√7 – 2)/3","(7 + 2)/3","(7 – 2)/3"],answer:0,topic:"Rationalisation"},
+  {q:"1/(9 – 8) is equal to",options:["1","1/1","9","8"],answer:1,topic:"Operations on Real Numbers
