@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Class 9 Mathematics Chapters - Interactive Table</title>
+  <title>Class 9 Mathematics Chapters</title>
   <style>
     body {
       margin: 0;
@@ -18,7 +18,7 @@
       border-radius: 18px;
       box-shadow: 0 8px 32px rgba(30,60,90,0.25);
       width: 92%;
-      max-width: 900px;
+      max-width: 700px;
       margin: 0 auto;
       padding: 28px 0 8px 0;
     }
@@ -48,7 +48,6 @@
     tbody tr {
       background: rgba(255,255,255,0.16);
       color: #222;
-      cursor: pointer;
       transition: background 0.3s, transform 0.2s;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(30,60,90,0.12);
@@ -57,39 +56,91 @@
       background: rgba(255,255,255,0.36);
       transform: scale(1.015);
     }
-    .expandable {
-      display: none;
-      background: rgba(255,255,255,0.93);
+    a.chapter-link {
       color: #185a9d;
-      padding: 0 24px 18px 24px;
-      border-radius: 0 0 12px 12px;
-      box-shadow: 0 6px 18px rgba(24,90,157,0.10);
-      animation: fadeIn 0.4s;
-    }
-    .expandable h3 {
-      margin-top: 18px;
-      margin-bottom: 6px;
-      color: #185a9d;
-      font-size: 1.07rem;
+      text-decoration: none;
       font-weight: 600;
-      letter-spacing: 0.02em;
+      transition: color 0.2s;
     }
-    .expandable ul {
-      margin: 0 0 10px 18px;
-      padding: 0;
-      font-size: 1rem;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-8px);}
-      to { opacity: 1; transform: translateY(0);}
+    a.chapter-link:hover {
+      color: #43cea2;
+      text-decoration: underline;
     }
     @media (max-width: 700px) {
       .container { padding: 10px 0 0 0;}
       th, td { padding: 10px 6px;}
-      .expandable { padding: 0 10px 10px 10px;}
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Class 9 Mathematics
+    <h1>Class 9 Mathematics Chapters</h1>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:70px;">Chapter</th>
+          <th>Title</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><a class="chapter-link" href="chapter1/index.html">Number Systems</a></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><a class="chapter-link" href="chapter2/index.html">Polynomials</a></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><a class="chapter-link" href="chapter3/index.html">Coordinate Geometry</a></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><a class="chapter-link" href="chapter4/index.html">Linear Equations in Two Variables</a></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><a class="chapter-link" href="chapter5/index.html">Introduction to Euclid’s Geometry</a></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><a class="chapter-link" href="chapter6/index.html">Lines and Angles</a></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><a class="chapter-link" href="chapter7/index.html">Triangles</a></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><a class="chapter-link" href="chapter8/index.html">Quadrilaterals</a></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><a class="chapter-link" href="chapter9/index.html">Areas of Parallelograms and Triangles</a></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><a class="chapter-link" href="chapter10/index.html">Circles</a></td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td><a class="chapter-link" href="chapter11/index.html">Constructions</a></td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td><a class="chapter-link" href="chapter12/index.html">Heron’s Formula</a></td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td><a class="chapter-link" href="chapter13/index.html">Surface Areas and Volumes</a></td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td><a class="chapter-link" href="chapter14/index.html">Statistics and Probability</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
