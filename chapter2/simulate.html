@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Polynomials – Step-by-Step Interactive Problems</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f6f8fa; margin:0; }
+    .container { max-width: 900px; margin: 30px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 28px; }
+    h1 { color: #2266aa; }
+    nav { margin-bottom: 24px; }
+    nav a { color: #2266aa; text-decoration: none; margin-right: 18px; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+    .problem { margin-bottom: 32px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+    .problem:last-child { border-bottom: none; }
+    .step { display:none; margin: 10px 0 0 20px; background: #f9f9f9; border-left: 4px solid #2196F3; padding: 10px 14px; border-radius: 4px;}
+    .show-step-btn {
+      background: #2196F3; color: #fff; border: none;
+      padding: 6px 16px; border-radius: 5px; font-size: 1em;
+      cursor: pointer; margin-top: 10px; margin-bottom: 10px;
+    }
+    .show-step-btn:hover { background: #1769aa; }
+    .main-btn {
+      background: #2196F3; color: #fff; border: none;
+      padding: 10px 28px; border-radius: 5px; font-size: 1.1em;
+      cursor: pointer; margin: 10px 10px 0 0;
+    }
+    .main-btn:hover { background: #1769aa; }
+    .reset-btn { background: #e53935; }
+    .reset-btn:hover { background: #b71c1c; }
+    .initials-section { margin-bottom: 22px; }
+    .initials-section label { font-weight: bold; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <nav>
+    <a href="../learnings.html">← Learnings</a>
+    <a href="../../index.html">All Chapters</a>
+  </nav>
+  <h1>Polynomials – 25 Step-by-Step Interactive Problems</h1>
+  <div class="initials-section">
+    <label for="initials">Enter your initials for PDF export: </label>
+    <input type="text" id="initials" name="initials" maxlength="10" style="padding:4px; font-size:1em;">
+  </div>
+  <div id="problems"></div>
+  <button class="main-btn" onclick="downloadPDF()">Download PDF with Solutions</button>
+  <button class="main-btn reset-btn" onclick="resetExamples()">Reset Examples</button>
+</div>
+<script>
+// 25 Step-by-step problems for Chapter 2: Polynomials
+var problems = [
+  {
+    title: "1. Identify whether 2/x is a polynomial. Why or why not?",
+    steps: [
+      "A polynomial is an algebraic expression where the exponents of the variable are non-negative integers.",
+      "In 2/x, x is in the denominator, which is equivalent to 2x<sup>-1</sup>.",
+      "The exponent -1 is not a non-negative integer.",
+      "<b>Conclusion:</b> 2/x is <b>not</b> a polynomial."
+    ]
+  },
+  {
+    title: "2. What is the degree of the polynomial 4x<sup>4</sup> + 0x<sup>3</sup> + 0x<sup>5</sup> + 5x + 7?",
+    steps: [
+      "The degree is the highest power of x with a non-zero coefficient.",
+      "Here, 4x<sup>4</sup> is the highest non-zero term (ignore 0x<sup>5</sup>).",
+      "<b>Conclusion:</b> Degree is <b>4</b>."
+    ]
+  },
+  {
+    title: "3. Is x<sup>2</sup> + 1/x a polynomial? Justify.",
+    steps: [
+      "Check the exponents: x<sup>2</sup> is fine, but 1/x = x<sup>-1</sup>.",
+      "Exponent -1 is not allowed in polynomials.",
+      "<b>Conclusion:</b> Not a polynomial."
+    ]
+  },
+  {
+    title: "4. Find the value of the polynomial p(x) = 3x<sup>2</sup> + 2x + 1 at x = 2.",
+    steps: [
+      "Substitute x = 2: p(2) = 3×2<sup>2</sup> + 2×2 + 1.",
+      "Calculate: 3×4 = 12; 2×2 = 4; 12 + 4 + 1 = 17.",
+      "<b>Conclusion:</b> p(2) = <b>17</b>."
+    ]
+  },
+  {
+    title: "5. What is the zero of the polynomial p(x) = 2x + 5?",
+    steps: [
+      "Set p(x) = 0: 2x + 5 = 0.",
+      "Solve: 2x = -5 ⇒ x = -5/2.",
+      "<b>Conclusion:</b> Zero is <b>-5/2</b>."
+    ]
+  },
+  {
+    title: "6. Use the remainder theorem to find the remainder when p(x) = x<sup>3</sup> - 2x<sup>2</sup> - 4x - 1 is divided by x + 1.",
+    steps: [
+      "Remainder theorem: Remainder = p(-1).",
+      "p(-1) = (-1)<sup>3</sup> - 2×(-1)<sup>2</sup> - 4×(-1) - 1.",
+      "Calculate: -1 - 2×1 + 4 - 1 = -1 -2 + 4 -1 = 0.",
+      "<b>Conclusion:</b> Remainder is <b>0</b>."
+    ]
+  },
+  {
+    title: "7. If x + 1 is a factor of 2x<sup>2</sup> + kx, find k.",
+    steps: [
+      "If x + 1 is a factor, then p(-1) = 0.",
+      "p(x) = 2x<sup>2</sup> + kx ⇒ p(-1) = 2×1 + k×(-1) = 2 - k = 0.",
+      "So, k = 2.",
+      "<b>Conclusion:</b> k = <b>2</b>."
+    ]
+  },
+  {
+    title: "8. Factorise x<sup>2</sup> + 9x + 18.",
+    steps: [
+      "Find two numbers whose product is 18 and sum is 9: 6 and 3.",
+      "So, x<sup>2</sup> + 6x + 3x + 18 = (x + 6)(x + 3).",
+      "<b>Conclusion:</b> (x + 6)(x + 3)."
+    ]
+  },
+  {
+    title: "9. Expand (x + y)<sup>2</sup>.",
+    steps: [
+      "Use the identity: (x + y)<sup>2</sup> = x<sup>2</sup> + 2xy + y<sup>2</sup>.",
+      "<b>Conclusion:</b> x<sup>2</sup> + 2xy + y<sup>2</sup>."
+    ]
+  },
+  {
+    title: "10. Expand (x - y)<sup>3</sup>.",
+    steps: [
+      "Use the identity: (x - y)<sup>3</sup> = x<sup>3</sup> - 3x<sup>2</sup>y + 3xy<sup>2</sup> - y<sup>3</sup>.",
+      "<b>Conclusion:</b> x<sup>3</sup> - 3x<sup>2</sup>y + 3xy<sup>2</sup> - y<sup>3</sup>."
+    ]
+  },
+  {
+    title: "11. Factorise x<sup>2</sup> - 16.",
+    steps: [
+      "This is a difference of squares: x<sup>2</sup> -
