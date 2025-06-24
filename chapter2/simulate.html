@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Polynomials – Step-by-Step Interactive Problems</title>
+  <title>Polynomials – 25 Step-by-Step Interactive Problems</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
@@ -52,7 +52,7 @@
 // 25 Step-by-step problems for Chapter 2: Polynomials
 var problems = [
   {
-    title: "1. Identify whether 2/x is a polynomial. Why or why not?",
+    title: "1. Is 2/x a polynomial? Why or why not?",
     steps: [
       "A polynomial is an algebraic expression where the exponents of the variable are non-negative integers.",
       "In 2/x, x is in the denominator, which is equivalent to 2x<sup>-1</sup>.",
@@ -135,4 +135,200 @@ var problems = [
   {
     title: "11. Factorise x<sup>2</sup> - 16.",
     steps: [
-      "This is a difference of squares: x<sup>2</sup> -
+      "This is a difference of squares: x<sup>2</sup> - 16 = (x + 4)(x - 4).",
+      "<b>Conclusion:</b> (x + 4)(x - 4)."
+    ]
+  },
+  {
+    title: "12. Find the degree and constant term of the polynomial 3x<sup>5</sup> - 4x<sup>2</sup> + 7.",
+    steps: [
+      "Degree is the highest power of x: 5.",
+      "Constant term is the term without x: 7.",
+      "<b>Conclusion:</b> Degree: <b>5</b>, Constant term: <b>7</b>."
+    ]
+  },
+  {
+    title: "13. For p(x) = x<sup>2</sup> - 4x + 3, compute p(2) - p(-1) + p(1/2).",
+    steps: [
+      "p(2) = 4 - 8 + 3 = -1.",
+      "p(-1) = 1 + 4 + 3 = 8.",
+      "p(1/2) = (1/4) - 2 + 3 = 1.25.",
+      "Sum: -1 - 8 + 1.25 = -7.75.",
+      "<b>Conclusion:</b> -7.75."
+    ]
+  },
+  {
+    title: "14. Find the zeroes of p(x) = x<sup>2</sup> - 5x + 6.",
+    steps: [
+      "Set p(x) = 0: x<sup>2</sup> - 5x + 6 = 0.",
+      "Factor: (x - 2)(x - 3) = 0.",
+      "So, x = 2 or x = 3.",
+      "<b>Conclusion:</b> Zeroes: <b>2</b> and <b>3</b>."
+    ]
+  },
+  {
+    title: "15. Factorise 4x<sup>2</sup> + 8x + 3.",
+    steps: [
+      "Find two numbers whose product is 4×3=12 and sum is 8.",
+      "Numbers: 6 and 2.",
+      "Split 8x: 4x<sup>2</sup> + 6x + 2x + 3 = (2x + 1)(2x + 3).",
+      "<b>Conclusion:</b> (2x + 1)(2x + 3)."
+    ]
+  },
+  {
+    title: "16. Expand (4a - b + 2c)<sup>2</sup>.",
+    steps: [
+      "Use identity: (x + y + z)<sup>2</sup> = x<sup>2</sup> + y<sup>2</sup> + z<sup>2</sup> + 2xy + 2yz + 2zx.",
+      "Let x=4a, y=-b, z=2c.",
+      "Compute each term: (4a)<sup>2</sup>=16a<sup>2</sup>, (-b)<sup>2</sup>=b<sup>2</sup>, (2c)<sup>2</sup>=4c<sup>2</sup>, 2×4a×-b=-8ab, 2×-b×2c=-4bc, 2×4a×2c=16ac.",
+      "Sum: 16a<sup>2</sup> + b<sup>2</sup> + 4c<sup>2</sup> - 8ab - 4bc + 16ac.",
+      "<b>Conclusion:</b> 16a<sup>2</sup> + b<sup>2</sup> + 4c<sup>2</sup> - 8ab + 16ac - 4bc."
+    ]
+  },
+  {
+    title: "17. If a + b + c = 0, show that a<sup>3</sup> + b<sup>3</sup> + c<sup>3</sup> = 3abc.",
+    steps: [
+      "Identity: a<sup>3</sup> + b<sup>3</sup> + c<sup>3</sup> - 3abc = (a + b + c)(a<sup>2</sup> + b<sup>2</sup> + c<sup>2</sup> - ab - bc - ca).",
+      "If a + b + c = 0, then the right side is 0.",
+      "So, a<sup>3</sup> + b<sup>3</sup> + c<sup>3</sup> = 3abc."
+    ]
+  },
+  {
+    title: "18. Classify 3x<sup>2</sup>y + 2y<sup>2</sup> as a polynomial in how many variables?",
+    steps: [
+      "Check the variables: x and y.",
+      "Both appear in the terms.",
+      "<b>Conclusion:</b> This is a polynomial in <b>two</b> variables."
+    ]
+  },
+  {
+    title: "19. What is the coefficient of x<sup>3</sup> in 6x<sup>5</sup> - 2x<sup>3</sup> + 7x + 1?",
+    steps: [
+      "Coefficient of x<sup>3</sup> is the number multiplying x<sup>3</sup>.",
+      "In -2x<sup>3</sup>, the coefficient is -2.",
+      "<b>Conclusion:</b> Coefficient is <b>-2</b>."
+    ]
+  },
+  {
+    title: "20. Factorise x<sup>3</sup> - 27.",
+    steps: [
+      "This is a difference of cubes: x<sup>3</sup> - 3<sup>3</sup>.",
+      "Use identity: a<sup>3</sup> - b<sup>3</sup> = (a - b)(a<sup>2</sup> + ab + b<sup>2</sup>).",
+      "So, (x - 3)(x<sup>2</sup> + 3x + 9)."
+    ]
+  },
+  {
+    title: "21. If x<sup>2</sup> + kx + 6 = (x + 2)(x + 3), find k.",
+    steps: [
+      "Expand (x + 2)(x + 3): x<sup>2</sup> + 3x + 2x + 6 = x<sup>2</sup> + 5x + 6.",
+      "So, k = 5."
+    ]
+  },
+  {
+    title: "22. Find the zeroes of p(x) = (x - 2)<sup>2</sup> - (x + 2)<sup>2</sup>.",
+    steps: [
+      "Expand: (x - 2)<sup>2</sup> = x<sup>2</sup> - 4x + 4; (x + 2)<sup>2</sup> = x<sup>2</sup> + 4x + 4.",
+      "Subtract: (x<sup>2</sup> - 4x + 4) - (x<sup>2</sup> + 4x + 4) = -8x.",
+      "So, p(x) = -8x ⇒ zero at x = 0."
+    ]
+  },
+  {
+    title: "23. Show that x + 3 is a factor of x<sup>3</sup> + 11x - x<sup>2</sup> + 9.",
+    steps: [
+      "By factor theorem: substitute x = -3.",
+      "p(-3) = (-3)<sup>3</sup> + 11×(-3) - (-3)<sup>2</sup> + 9 = -27 - 33 - 9 + 9 = -60.",
+      "Since p(-3) ≠ 0, x + 3 is <b>not</b> a factor."
+    ]
+  },
+  {
+    title: "24. Expand (x + y + z)<sup>2</sup>.",
+    steps: [
+      "Use identity: (x + y + z)<sup>2</sup> = x<sup>2</sup> + y<sup>2</sup> + z<sup>2</sup> + 2xy + 2yz + 2zx.",
+      "<b>Conclusion:</b> x<sup>2</sup> + y<sup>2</sup> + z<sup>2</sup> + 2xy + 2yz + 2zx."
+    ]
+  },
+  {
+    title: "25. If x + y = 12 and xy = 27, find x<sup>3</sup> + y<sup>3</sup>.",
+    steps: [
+      "Use the identity: x<sup>3</sup> + y<sup>3</sup> = (x + y)<sup>3</sup> - 3xy(x + y).",
+      "Plug in values: (12)<sup>3</sup> - 3×27×12 = 1728 - 972 = 756.",
+      "<b>Conclusion:</b> x<sup>3</sup> + y<sup>3</sup> = 756."
+    ]
+  }
+];
+
+// Render problems
+function renderProblems() {
+  var html = "";
+  for (var i = 0; i < problems.length; i++) {
+    html += '<div class="problem" id="problem-'+i+'">';
+    html += '<b>' + problems[i].title + '</b><br>';
+    html += '<button class="show-step-btn" onclick="showStep('+i+',0)">Show Step 1</button>';
+    for (var j = 0; j < problems[i].steps.length; j++) {
+      html += '<div class="step" id="step-'+i+'-'+j+'">'+problems[i].steps[j]+'</div>';
+      if (j < problems[i].steps.length - 1)
+        html += '<button class="show-step-btn" style="display:none" id="btn-'+i+'-'+(j+1)+'" onclick="showStep('+i+','+(j+1)+')">Show Step '+(j+2)+'</button>';
+    }
+    html += '</div>';
+  }
+  document.getElementById('problems').innerHTML = html;
+}
+
+// Show next step in a problem
+function showStep(prob, step) {
+  document.getElementById('step-'+prob+'-'+step).style.display = 'block';
+  var nextBtn = document.getElementById('btn-'+prob+'-'+(step+1));
+  if (nextBtn) nextBtn.style.display = 'inline-block';
+  // Hide the button just clicked
+  if (step === 0) {
+    // Find the first button in this problem
+    var btns = document.getElementById('problem-'+prob).getElementsByTagName('button');
+    if (btns.length > 0) btns[0].style.display = 'none';
+  } else {
+    var prevBtn = document.getElementById('btn-'+prob+'-'+step);
+    if (prevBtn) prevBtn.style.display = 'none';
+  }
+}
+
+// Reset all steps
+function resetExamples() {
+  renderProblems();
+}
+
+// Download PDF with all solutions
+function downloadPDF() {
+  var initials = document.getElementById('initials').value.trim();
+  if (!initials) {
+    alert('Please enter your initials before downloading PDF!');
+    return;
+  }
+  var jsPDF = window.jspdf.jsPDF;
+  var doc = new jsPDF();
+  doc.setFontSize(16);
+  doc.text("Polynomials – Stepwise Problems", 14, 18);
+  doc.setFontSize(12);
+  doc.text("Initials: " + initials, 14, 28);
+  var y = 36;
+  for (var i = 0; i < problems.length; i++) {
+    var title = problems[i].title.replace(/<[^>]+>/g, '');
+    doc.setFont(undefined, 'bold');
+    doc.text((i+1)+". "+title, 14, y);
+    y += 7;
+    doc.setFont(undefined, 'normal');
+    for (var j = 0; j < problems[i].steps.length; j++) {
+      var step = problems[i].steps[j].replace(/<[^>]+>/g, '');
+      doc.text("Step "+(j+1)+": "+step, 18, y);
+      y += 7;
+      if (y > 270) { doc.addPage(); y = 20; }
+    }
+    y += 2;
+    if (y > 270) { doc.addPage(); y = 20; }
+  }
+  doc.save("Polynomials_Stepwise_Solutions_"+initials+".pdf");
+}
+
+// Init
+renderProblems();
+</script>
+</body>
+</html>
