@@ -52,7 +52,7 @@
 </div>
 <script>
 // -- 25 MCQs for Chapter 2: Polynomials with topics for heatmap --
-const questionBank = [
+var questionBank = [
   {q:"Which one of the following is a polynomial?",options:["2/x","x<sup>2</sup> - 2/x","3x<sup>2</sup> + x + 2","1/x + 1"],answer:2,topic:"Definition"},
   {q:"2 is a polynomial of degree",options:["2","0","1","1/2"],answer:1,topic:"Degree"},
   {q:"Degree of the polynomial 4x<sup>4</sup> + 0x<sup>3</sup> + 0x<sup>5</sup> + 5x + 7 is",options:["4","5","3","7"],answer:0,topic:"Degree"},
@@ -81,43 +81,147 @@ const questionBank = [
 ];
 
 // -- Timer Logic --
-let timer = 0, timerInterval;
+var timer = 0, timerInterval;
 function startTimer() {
   timer = 0;
   clearInterval(timerInterval);
-  timerInterval = setInterval(() => {
+  timerInterval = setInterval(function() {
     timer++;
-    let min = String(Math.floor(timer / 60)).padStart(2, '0');
-    let sec = String(timer % 60).padStart(2, '0');
-    document.getElementById('timer-span').textContent = `${min}:${sec}`;
+    var min = String(Math.floor(timer / 60));
+    if (min.length < 2) min = "0" + min;
+    var sec = String(timer % 60);
+    if (sec.length < 2) sec = "0" + sec;
+    document.getElementById('timer-span').textContent = min + ":" + sec;
   }, 1000);
 }
 
 // -- Render MCQs --
 function renderQuiz() {
-  const form = document.getElementById('mcqQuiz');
-  form.innerHTML = `
-    <div class="initials-section">
-      <label for="initials">Enter your initials before submitting: </label>
-      <input type="text" id="initials" name="initials" maxlength="10" required style="padding:4px; font-size:1em;">
-    </div>
-  `;
-  questionBank.forEach((qObj, idx) => {
-    let qHtml = `<div class="mcq"><b>Q${idx + 1}.</b> ${qObj.q}<br>`;
-    qObj.options.forEach((opt, oidx) => {
-      qHtml += `<label><input type="radio" name="q${idx}" value="${oidx}"> ${opt}</label>`;
-    });
+  var form = document.getElementById('mcqQuiz');
+  form.innerHTML = ''
+    + '<div class="initials-section">'
+    + '<label for="initials">Enter your initials before submitting: </label>'
+    + '<input type="text" id="initials" name="initials" maxlength="10" required style="padding:4px; font-size:1em;">'
+    + '</div>';
+  for (var idx = 0; idx < questionBank.length; idx++) {
+    var qObj = questionBank[idx];
+    var qHtml = '<div class="mcq"><b>Q' + (idx + 1) + '.</b> ' + qObj.q + '<br>';
+    for (var oidx = 0; oidx < qObj.options.length; oidx++) {
+      qHtml += '<label><input type="radio" name="q' + idx + '" value="' + oidx + '"> ' + qObj.options[oidx] + '</label>';
+    }
     qHtml += '</div>';
     form.innerHTML += qHtml;
-  });
-  form.innerHTML += `
-    <button class="quiz-btn" type="button" onclick="submitQuiz()">Submit Quiz</button>
-    <button class="reset-btn" type="button" onclick="resetQuiz()">Reset Quiz</button>
-  `;
+  }
+  form.innerHTML += ''
+    + '<button class="quiz-btn" type="button" onclick="submitQuiz()">Submit Quiz</button>'
+    + '<button class="reset-btn" type="button" onclick="resetQuiz()">Reset Quiz</button>';
 }
 
 function submitQuiz() {
   clearInterval(timerInterval);
-  let initials = document.getElementById('initials').value.trim();
+  var initials = document.getElementById('initials').value.trim();
   if (!initials) {
-    alert('Please enter your initials
+    alert('Please enter your initials before submitting!');
+    return;
+  }
+  var score = 0, attempted = 0, feedback = '';
+  var topicMap = {};
+  for (var idx = 0; idx < questionBank.length; idx++) {
+    var qObj = questionBank[idx];
+    var radios = document.getElementsByName('q' + idx);
+    var selected = -1;
+    for (var r = 0; r < radios.length; r++) {
+      if (radios[r].checked) selected = r;
+    }
+    if (selected !== -1) attempted++;
+    if (selected === qObj.answer) score++;
+    // For heatmap
+    if (!topicMap[qObj.topic]) topicMap[qObj.topic] = {total:0,correct:0};
+    topicMap[qObj.topic].total++;
+    if (selected === qObj.answer) topicMap[qObj.topic].correct++;
+    feedback += '<div>Q' + (idx + 1) + ': ' + (selected === qObj.answer ? '<span style="color:green">Correct</span>' : '<span style="color:red">Incorrect</span>') + ' (Correct: ' + String.fromCharCode(65 + qObj.answer) + ')</div>';
+  }
+
+  var min = String(Math.floor(timer / 60));
+  if (min.length < 2) min = "0" + min;
+  var sec = String(timer % 60);
+  if (sec.length < 2) sec = "0" + sec;
+
+  // Heatmap Table
+  var heatmap = '<table class="heatmap-table"><tr><th>Topic</th><th>Correct</th><th>Total</th><th>Performance</th></tr>';
+  for (var topic in topicMap) {
+    var perf = topicMap[topic].correct / topicMap[topic].total;
+    var cls = perf >= 0.8 ? 'heat-good' : perf >= 0.5 ? 'heat-average' : 'heat-weak';
+    var perfLabel = perf >= 0.8 ? 'Strong' : perf >= 0.5 ? 'Average' : 'Weak';
+    heatmap += '<tr><td>' + topic + '</td><td>' + topicMap[topic].correct + '</td><td>' + topicMap[topic].total + '</td><td class="' + cls + '">' + perfLabel + '</td></tr>';
+  }
+  heatmap += '</table>';
+
+  document.getElementById('quiz-result').innerHTML =
+    '<b>Your Score: ' + score + ' / ' + questionBank.length + '</b><br>'
+    + 'Attempted: ' + attempted + ' / ' + questionBank.length + '<br>'
+    + 'Time Taken: ' + min + ':' + sec + '<br>'
+    + 'Initials: <b>' + initials + '</b><br><br>'
+    + '<b>Topic Heatmap:</b>' + heatmap
+    + '<button class="quiz-btn pdf-btn" onclick="downloadPDF(\'' + initials + '\',' + score + ',' + questionBank.length + ',\'' + min + ':' + sec + '\',\'' + encodeURIComponent(JSON.stringify(topicMap)) + '\')">Download PDF Report</button>'
+    + '<button class="reset-btn" onclick="resetQuiz()">Reset Quiz</button>'
+    + '<br><br>'
+    + '<b>Feedback:</b><br>' + feedback;
+  document.getElementById('quiz-result').style.display = 'block';
+}
+
+function downloadPDF(initials, score, total, time, topicMapStr) {
+  var topicMap = JSON.parse(decodeURIComponent(topicMapStr));
+  var jsPDF = window.jspdf.jsPDF;
+  var doc = new jsPDF();
+  doc.setFontSize(16);
+  doc.text("Polynomials – MCQ Quiz Report", 14, 18);
+  doc.setFontSize(12);
+  doc.text("Initials: " + initials, 14, 28);
+  doc.text("Score: " + score + " / " + total, 14, 36);
+  doc.text("Time Taken: " + time, 14, 44);
+
+  // Heatmap summary
+  var y = 54;
+  doc.text("Topic Performance:", 14, y);
+  y += 8;
+  for (var topic in topicMap) {
+    var perf = topicMap[topic].correct / topicMap[topic].total;
+    var perfLabel = perf >= 0.8 ? 'Strong' : perf >= 0.5 ? 'Average' : 'Weak';
+    doc.text(topic + ": " + topicMap[topic].correct + "/" + topicMap[topic].total + " (" + perfLabel + ")", 18, y);
+    y += 8;
+  }
+
+  // Feedback
+  y += 6;
+  doc.text("Question-wise Feedback:", 14, y);
+  y += 8;
+  for (var idx = 0; idx < questionBank.length; idx++) {
+    var qObj = questionBank[idx];
+    var radios = document.getElementsByName('q' + idx);
+    var selected = -1;
+    for (var r = 0; r < radios.length; r++) {
+      if (radios[r].checked) selected = r;
+    }
+    var txt = "Q" + (idx+1) + ": " + (selected === qObj.answer ? "Correct" : "Incorrect") + " (Correct: " + String.fromCharCode(65 + qObj.answer) + ")";
+    doc.text(txt, 18, y);
+    y += 7;
+    if (y > 270) { doc.addPage(); y = 20; }
+  }
+
+  doc.save("Polynomials_Quiz_Report_" + initials + ".pdf");
+}
+
+function resetQuiz() {
+  renderQuiz();
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('timer-span').textContent = '00:00';
+  startTimer();
+}
+
+// -- Init --
+renderQuiz();
+startTimer();
+</script>
+</body>
+</html>
