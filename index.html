@@ -2,14 +2,94 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Mathematics Chapters Table - Interactive Design</title>
+  <title>Class 9 Mathematics Chapters - Interactive Table</title>
   <style>
-    /* Background gradient with subtle pattern */
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      background: linear-gradient(120deg, #43cea2 0%, #185a9d 100%);
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align
+      padding: 40px 0;
+      color: #222;
+    }
+    .container {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(30,60,90,0.25);
+      width: 92%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 28px 0 8px 0;
+    }
+    h1 {
+      text-align: center;
+      color: #fff;
+      letter-spacing: 1.2px;
+      margin-bottom: 30px;
+      text-shadow: 0 2px 8px rgba(24,90,157,0.25);
+    }
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+      table-layout: fixed;
+    }
+    thead tr {
+      background: rgba(255,255,255,0.22);
+      color: #185a9d;
+      font-size: 1.06rem;
+      letter-spacing: 0.06em;
+    }
+    th, td {
+      padding: 16px 12px;
+      text-align: left;
+    }
+    tbody tr {
+      background: rgba(255,255,255,0.16);
+      color: #222;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(30,60,90,0.12);
+    }
+    tbody tr:hover {
+      background: rgba(255,255,255,0.36);
+      transform: scale(1.015);
+    }
+    .expandable {
+      display: none;
+      background: rgba(255,255,255,0.93);
+      color: #185a9d;
+      padding: 0 24px 18px 24px;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 6px 18px rgba(24,90,157,0.10);
+      animation: fadeIn 0.4s;
+    }
+    .expandable h3 {
+      margin-top: 18px;
+      margin-bottom: 6px;
+      color: #185a9d;
+      font-size: 1.07rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .expandable ul {
+      margin: 0 0 10px 18px;
+      padding: 0;
+      font-size: 1rem;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-8px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @media (max-width: 700px) {
+      .container { padding: 10px 0 0 0;}
+      th, td { padding: 10px 6px;}
+      .expandable { padding: 0 10px 10px 10px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Class 9 Mathematics
