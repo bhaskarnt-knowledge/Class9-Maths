@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Number Systems – MCQ Quiz (GitHub Pages Compatible)</title>
+  <title>Number Systems – MCQ Quiz with PDF Report & Timer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
@@ -49,7 +49,7 @@
   <div id="quiz-result"></div>
 </div>
 <script>
-// --- Question bank ---
+// -- Question bank from your PDF, mapped to topics --
 const questionBank = [
   {q:"Every rational number is",options:["a natural number","an integer","a real number","a whole number"],answer:2,topic:"Rational Numbers"},
   {q:"Between two rational numbers",options:["there is no rational number","there is exactly one rational number","there are infinitely many rational numbers","there are only rational numbers and no irrational numbers"],answer:2,topic:"Rational Numbers"},
@@ -240,6 +240,7 @@ function downloadPDF(initials, dateStr, timeSpent) {
   doc.setLineWidth(0.1);
   doc.line(14, y, 180, y);
   y += 4;
+  // Table rows
   for (let t of allTopics) {
     let c = window._lastQuizReport.topicStats[t].correct;
     let tot = window._lastQuizReport.topicStats[t].total;
