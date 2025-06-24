@@ -35,7 +35,8 @@
     .timer { font-size: 1.1em; color: #444; margin-bottom: 18px; }
     .form-section { margin-bottom: 22px; }
     .form-section label { font-weight: bold; }
-    .hide { display: none !important; }
+    .initials-section { margin-bottom: 22px; }
+    .initials-section label { font-weight: bold; }
   </style>
 </head>
 <body>
@@ -45,15 +46,8 @@
     <a href="../../index.html">All Chapters</a>
   </nav>
   <h1>Number Systems – Interactive MCQ Quiz</h1>
-  <div id="user-form" class="form-section">
-    <label for="user-name">Name:</label>
-    <input type="text" id="user-name" required style="font-size:1em;padding:4px;" />
-    <label for="quiz-date" style="margin-left:24px;">Date:</label>
-    <input type="date" id="quiz-date" required style="font-size:1em;padding:4px;" />
-    <button class="quiz-btn" onclick="startQuiz()">Start Quiz</button>
-  </div>
-  <div id="timer" class="timer hide">Time: <span id="timer-span">00:00</span></div>
-  <form id="mcqQuiz" class="hide"></form>
+  <div id="timer" class="timer">Time: <span id="timer-span">00:00</span></div>
+  <form id="mcqQuiz"></form>
   <div id="quiz-result"></div>
 </div>
 <script>
@@ -80,4 +74,206 @@ const questionBank = [
   {q:"Value of (√81)<sup>–2</sup> is",options:["1/9","1/3","1/81","9"],answer:2,topic:"Laws of Exponents"},
   {q:"Value of (256)<sup>0.16</sup> × (256)<sup>0.09</sup> is",options:["4","16","64","256.25"],answer:0,topic:"Laws of Exponents"},
   {q:"Which of the following is equal to x?",options:["(12x - 5x)/7","(1/4) × (12x/3)","(2/3) × 3x","(12x/7) × (7/12)x"],answer:2,topic:"Operations on Real Numbers"},
-  {q:"Which of the following is irrational?",options:["0.25","0.333...","√5","5/2"],answer:2,topic
+  {q:"Which of the following is irrational?",options:["0.25","0.333...","√5","5/2"],answer:2,topic:"Irrational Numbers"},
+  {q:"The decimal expansion of 1/7 is",options:["terminating","non-terminating recurring","non-terminating non-recurring","none of these"],answer:1,topic:"Decimal Expansions"},
+  {q:"Which of the following is a rational number?",options:["π","√3","0.75","√5"],answer:2,topic:"Rational Numbers"},
+  {q:"The sum of a rational and an irrational number is always",options:["rational","irrational","integer","natural number"],answer:1,topic:"Operations on Real Numbers"}
+];
+const allTopics = [
+  "Rational Numbers",
+  "Irrational Numbers",
+  "Decimal Expansions",
+  "Operations on Real Numbers",
+  "Rationalisation",
+  "Laws of Exponents"
+];
+
+// --- Timer ---
+let timerInterval = null, timerSeconds = 0;
+function startTimer() {
+  timerSeconds = 0;
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    timerSeconds++;
+    updateTimerDisplay();
+  }, 1000);
+}
+function stopTimer() {
+  if (timerInterval) clearInterval(timerInterval);
+}
+function updateTimerDisplay() {
+  let min = Math.floor(timerSeconds/60), sec = timerSeconds%60;
+  document.getElementById("timer-span").textContent = 
+    (min<10?"0":"")+min+":"+(sec<10?"0":"")+sec;
+}
+function formatTime(secs) {
+  let min = Math.floor(secs/60), sec = secs%60;
+  return (min<10?"0":"")+min+":"+(sec<10?"0":"")+sec;
+}
+
+// --- Quiz rendering ---
+function shuffle(array) {
+  let arr = array.slice();
+  for (let i = arr.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+let quizOrder = [];
+function renderQuiz() {
+  quizOrder = shuffle([...Array(questionBank.length).keys()]);
+  const form = document.getElementById("mcqQuiz");
+  form.innerHTML = '';
+  // Initials field at the top
+  form.innerHTML += `
+    <div class="initials-section">
+      <label for="user-initials">Enter your initials (required):</label>
+      <input type="text" id="user-initials" maxlength="5" required style="font-size:1em;padding:4px;" />
+    </div>
+  `;
+  quizOrder.forEach((qIdx, i) => {
+    const qObj = questionBank[qIdx];
+    let html = `<div class="mcq"><b>${i+1}. ${qObj.q}</b>`;
+    qObj.options.forEach((opt, j) => {
+      const optLabel = String.fromCharCode(65 + j);
+      html += `<label><input type="radio" name="q${i+1}" value="${optLabel}"> (${optLabel}) ${opt}</label>`;
+    });
+    html += "</div>";
+    form.innerHTML += html;
+  });
+  form.innerHTML += `<button type="button" class="quiz-btn" onclick="gradeQuiz()">Submit Quiz</button>`;
+  document.getElementById("quiz-result").style.display = "none";
+}
+renderQuiz();
+startTimer();
+
+// --- Grading and heatmap ---
+function gradeQuiz() {
+  let initials = document.getElementById("user-initials").value.trim();
+  if (!initials) {
+    alert("Please enter your initials before submitting.");
+    document.getElementById("user-initials").focus();
+    return;
+  }
+  stopTimer();
+  let total = questionBank.length, score = 0, unanswered = [];
+  let topicStats = {};
+  for (let t of allTopics) topicStats[t] = {correct:0, total:0};
+  for (let i=0; i<quizOrder.length; i++) {
+    let qObj = questionBank[quizOrder[i]];
+    let radios = document.getElementsByName("q"+(i+1)), answered = false, userAns = null;
+    for (let j=0; j<radios.length; j++) {
+      if (radios[j].checked) {
+        answered = true;
+        userAns = radios[j].value;
+        break;
+      }
+    }
+    if (!answered) { unanswered.push(i+1); continue; }
+    topicStats[qObj.topic].total++;
+    if (userAns.charCodeAt(0)-65 === qObj.answer) {
+      score++;
+      topicStats[qObj.topic].correct++;
+    }
+  }
+  var resultDiv = document.getElementById("quiz-result");
+  if (unanswered.length > 0) {
+    resultDiv.style.display = "block";
+    resultDiv.innerHTML = "<b>Please answer all questions before submitting.</b>";
+    return;
+  }
+  // Heatmap table
+  var heatmap = "<table class='heatmap-table'><tr><th>Topic</th><th>Score</th><th>Strength</th></tr>";
+  for (let t of allTopics) {
+    let c = topicStats[t].correct, tot = topicStats[t].total;
+    let frac = tot ? c/tot : 0;
+    let cls = frac >= 0.8 ? "heat-good" : (frac >= 0.5 ? "heat-average" : "heat-weak");
+    let label = frac >= 0.8 ? "Strong" : (frac >= 0.5 ? "Average" : "Weak");
+    heatmap += `<tr class='${cls}'><td>${t}</td><td>${c} / ${tot}</td><td>${label}</td></tr>`;
+  }
+  heatmap += "</table>";
+  let date = new Date();
+  let dateStr = date.getFullYear()+"-"+String(date.getMonth()+1).padStart(2,'0')+"-"+String(date.getDate()).padStart(2,'0');
+  let timeSpent = formatTime(timerSeconds);
+  var msg = `<b>Initials:</b> ${initials}<br><b>Date:</b> ${dateStr}<br><b>Total Time Spent:</b> ${timeSpent}<br>`;
+  msg += "<b>Your Score: " + score + " / " + total + "</b><br><br>";
+  msg += "<b>Chapter-wise Strength & Weakness:</b>" + heatmap;
+  msg += `<br>
+  <button class="quiz-btn pdf-btn" onclick="downloadPDF('${initials}','${dateStr}','${timeSpent}')">Download PDF Report</button>
+  <button class="quiz-btn pdf-btn" onclick="mailtoPDF()">Email Report</button>
+  <a href='#' onclick='resetQuiz();return false;' class="quiz-btn">Try Again (Randomize Questions)</a>`;
+  resultDiv.style.display = "block";
+  resultDiv.innerHTML = msg;
+  window.scrollTo({top: resultDiv.offsetTop-40, behavior:'smooth'});
+  // Save for PDF/email
+  window._lastQuizReport = {
+    initials: initials, date: dateStr, timeSpent: timeSpent,
+    score: score, total: total, topicStats: topicStats
+  };
+}
+
+// --- PDF generation ---
+function downloadPDF(initials, dateStr, timeSpent) {
+  const { jsPDF } = window.jspdf;
+  let doc = new jsPDF();
+  let y = 12;
+  doc.setFontSize(16);
+  doc.text("Number Systems – MCQ Quiz Report", 14, y);
+  y += 8;
+  doc.setFontSize(11);
+  doc.text("Initials: " + (window._lastQuizReport?.initials || ""), 14, y);
+  y += 6;
+  doc.text("Date: " + (window._lastQuizReport?.date || ""), 14, y);
+  y += 6;
+  doc.text("Total Time Spent: " + (window._lastQuizReport?.timeSpent || ""), 14, y);
+  y += 8;
+  doc.text(`Score: ${window._lastQuizReport?.score} / ${window._lastQuizReport?.total}`, 14, y);
+  y += 10;
+  doc.setFontSize(13);
+  doc.text("Heatmap (Chapter-wise Strength & Weakness):", 14, y);
+  y += 8;
+  doc.setFontSize(11);
+  // Table header
+  doc.text("Topic", 14, y);
+  doc.text("Score", 80, y);
+  doc.text("Strength", 120, y);
+  y += 6;
+  doc.setLineWidth(0.1);
+  doc.line(14, y, 180, y);
+  y += 4;
+  // Table rows
+  for (let t of allTopics) {
+    let c = window._lastQuizReport.topicStats[t].correct;
+    let tot = window._lastQuizReport.topicStats[t].total;
+    let frac = tot ? c/tot : 0;
+    let label = frac >= 0.8 ? "Strong" : (frac >= 0.5 ? "Average" : "Weak");
+    doc.text(t, 14, y);
+    doc.text(`${c} / ${tot}`, 80, y);
+    doc.text(label, 120, y);
+    y += 6;
+    if (y > 270) { doc.addPage(); y = 12; }
+  }
+  doc.save(`Quiz_Report_${(window._lastQuizReport?.initials||"User")}_${(window._lastQuizReport?.date||"")}.pdf`);
+}
+
+// --- Email (manual, as attachment not supported in mailto) ---
+function mailtoPDF() {
+  alert(
+    "Due to browser security, automatic email with PDF attachment is not possible.\n\n"+
+    "Please download the PDF report, then attach it manually to an email addressed to:\n\n"+
+    "bhaskarn.utilities@gmail.com, sobitha.utilities@gmail.com"
+  );
+  window.location.href = "mailto:bhaskarn.utilities@gmail.com,sobitha.utilities@gmail.com?subject=MCQ Quiz Report&body=Please find attached the quiz report PDF generated on the quiz page.";
+}
+
+// --- Reset for Try Again ---
+function resetQuiz() {
+  document.getElementById("mcqQuiz").reset && document.getElementById("mcqQuiz").reset();
+  renderQuiz();
+  startTimer();
+  document.getElementById("quiz-result").style.display = "none";
+}
+</script>
+</body>
+</html>
