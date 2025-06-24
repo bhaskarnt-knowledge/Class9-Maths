@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Number Systems – Step-by-Step Interactive Problems</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- jsPDF CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     body { font-family: Arial, sans-serif; background:#f6f8fa; margin:0; }
@@ -38,3 +39,298 @@
     <div>
       <button class="btn" onclick="resetAll()">Reset Examples</button>
       <button class="btn" onclick="downloadPDF()">Download PDF with Solutions</button>
+    </div>
+  </div>
+  <ul class="problems-list" id="problems-list"></ul>
+</div>
+<script type="text/javascript">
+// All code is ES5 and will work on GitHub Pages
+var problems = [
+  {
+    title: "1. Define rational and irrational numbers. Give one example of each.",
+    steps: [
+      "A rational number can be written as p/q, where p, q are integers and q ≠ 0.",
+      "Example: 3/4 is rational.",
+      "An irrational number cannot be written as p/q.",
+      "Example: √2 is irrational."
+    ]
+  },
+  {
+    title: "2. Is 0.333... a rational number? Why?",
+    steps: [
+      "0.333... is a non-terminating, repeating decimal.",
+      "Any repeating decimal can be written as a fraction.",
+      "0.333... = 1/3.",
+      "<b>Conclusion:</b> 0.333... is rational."
+    ]
+  },
+  {
+    title: "3. Write the decimal expansion of 1/7. Is it rational or irrational?",
+    steps: [
+      "1/7 = 0.142857142857... (the digits 142857 repeat).",
+      "It is non-terminating, but repeating.",
+      "<b>Conclusion:</b> 1/7 is rational."
+    ]
+  },
+  {
+    title: "4. Is √49 a rational or irrational number?",
+    steps: [
+      "√49 = 7, which is an integer.",
+      "All integers are rational numbers.",
+      "<b>Conclusion:</b> √49 is rational."
+    ]
+  },
+  {
+    title: "5. Is π a rational number? Explain.",
+    steps: [
+      "π = 3.1415926535... is non-terminating and non-repeating.",
+      "It cannot be written as a fraction p/q.",
+      "<b>Conclusion:</b> π is irrational."
+    ]
+  },
+  {
+    title: "6. Classify the following as rational or irrational: 0, √2, 7/8, 0.1010010001...",
+    steps: [
+      "0: Rational (can be written as 0/1).",
+      "√2: Irrational (cannot be written as p/q).",
+      "7/8: Rational (fraction).",
+      "0.1010010001...: Irrational (non-terminating, non-repeating)."
+    ]
+  },
+  {
+    title: "7. Find three rational numbers between 1 and 2.",
+    steps: [
+      "To find rationals between 1 and 2, pick fractions with denominator > 1.",
+      "Example: 1.2, 1.5, 1.75 are all between 1 and 2.",
+      "<b>Any number like 3/2 = 1.5 is rational and between 1 and 2.</b>"
+    ]
+  },
+  {
+    title: "8. Locate √5 on the number line (describe the construction).",
+    steps: [
+      "Draw a line and mark O and A such that OA = 2 units.",
+      "At A, draw AB perpendicular to OA, AB = 1 unit.",
+      "Join OB. OB = √(2² + 1²) = √5.",
+      "With O as center and OB as radius, draw an arc to cut the line at P.",
+      "P represents √5 on the number line."
+    ]
+  },
+  {
+    title: "9. Express 0.727272... as a fraction.",
+    steps: [
+      "Let x = 0.727272...",
+      "100x = 72.727272...",
+      "100x - x = 72.727272... - 0.727272... = 72",
+      "99x = 72 ⇒ x = 72/99 = 8/11."
+    ]
+  },
+  {
+    title: "10. Rationalise the denominator of 1/(√3 + 1).",
+    steps: [
+      "Multiply numerator and denominator by (√3 - 1).",
+      "1/(√3 + 1) × (√3 - 1)/(√3 - 1) = (√3 - 1)/( (√3)² - 1² )",
+      "= (√3 - 1)/(3 - 1)",
+      "= (√3 - 1)/2"
+    ]
+  },
+  {
+    title: "11. If x = 0.101010..., express x as a fraction.",
+    steps: [
+      "Let x = 0.101010...",
+      "100x = 10.101010...",
+      "100x - x = 10.101010... - 0.101010... = 10",
+      "99x = 10 ⇒ x = 10/99"
+    ]
+  },
+  {
+    title: "12. Is the sum of a rational and an irrational number always irrational? Give an example.",
+    steps: [
+      "Let r = rational, s = irrational.",
+      "r + s is always irrational.",
+      "Example: 2 + √3 = irrational."
+    ]
+  },
+  {
+    title: "13. Is the product of a non-zero rational and an irrational number always irrational? Give an example.",
+    steps: [
+      "Let r ≠ 0 (rational), s (irrational).",
+      "r × s is always irrational.",
+      "Example: 3 × π = irrational."
+    ]
+  },
+  {
+    title: "14. Express 0.999... as a fraction.",
+    steps: [
+      "Let x = 0.999...",
+      "10x = 9.999...",
+      "10x - x = 9.999... - 0.999... = 9",
+      "9x = 9 ⇒ x = 1"
+    ]
+  },
+  {
+    title: "15. State whether the decimal expansion of 23/40 terminates or not. Justify.",
+    steps: [
+      "23/40 in lowest terms: denominator = 40 = 2³ × 5¹.",
+      "Since denominator has only 2 and 5 as prime factors, it terminates.",
+      "23 ÷ 40 = 0.575 (terminating)."
+    ]
+  },
+  {
+    title: "16. Write the decimal expansion of 1/6. Is it terminating or non-terminating recurring?",
+    steps: [
+      "1/6 = 0.1666... (6 repeats).",
+      "It is non-terminating, recurring.",
+      "So, 1/6 is rational."
+    ]
+  },
+  {
+    title: "17. Write the decimal expansion of 1/13. Is it terminating or non-terminating recurring?",
+    steps: [
+      "1/13 = 0.076923076923... (076923 repeats).",
+      "It is non-terminating, recurring.",
+      "So, 1/13 is rational."
+    ]
+  },
+  {
+    title: "18. Write the following in decimal form: (i) 7/8 (ii) 2/11",
+    steps: [
+      "(i) 7/8 = 0.875 (terminating).",
+      "(ii) 2/11 = 0.181818... (18 repeats, non-terminating recurring)."
+    ]
+  },
+  {
+    title: "19. Find three irrational numbers between 2 and 3.",
+    steps: [
+      "Irrational numbers between 2 and 3: √5 ≈ 2.236, √6 ≈ 2.449, √7 ≈ 2.645.",
+      "All are irrational and between 2 and 3."
+    ]
+  },
+  {
+    title: "20. If x = 2 + √3 and y = 2 - √3, find x + y and x × y. Are the results rational or irrational?",
+    steps: [
+      "x + y = (2 + √3) + (2 - √3) = 4 (rational).",
+      "x × y = (2 + √3)(2 - √3) = 4 - 3 = 1 (rational)."
+    ]
+  },
+  {
+    title: "21. MCQ: Which of the following is irrational? (A) 0.25 (B) 0.333... (C) √5 (D) 5/2",
+    steps: [
+      "(A): 0.25 = 1/4 (rational).",
+      "(B): 0.333... = 1/3 (rational).",
+      "(C): √5 (irrational).",
+      "(D): 5/2 (rational).",
+      "<b>Answer:</b> (C) √5"
+    ]
+  },
+  {
+    title: "22. MCQ: The decimal expansion of a rational number cannot be: (A) terminating (B) non-terminating (C) non-terminating recurring (D) non-terminating non-recurring",
+    steps: [
+      "Rational numbers: decimal expansion is terminating or non-terminating recurring.",
+      "Non-terminating non-recurring decimals are irrational.",
+      "<b>Answer:</b> (D) non-terminating non-recurring"
+    ]
+  },
+  {
+    title: "23. MCQ: The product of any two irrational numbers is: (A) always irrational (B) always rational (C) always integer (D) sometimes rational, sometimes irrational",
+    steps: [
+      "√2 × √2 = 2 (rational).",
+      "√2 × √3 = √6 (irrational).",
+      "<b>Answer:</b> (D) sometimes rational, sometimes irrational"
+    ]
+  },
+  {
+    title: "24. MCQ: The decimal expansion of 1/7 is: (A) terminating (B) non-terminating recurring (C) non-terminating non-recurring (D) none of these",
+    steps: [
+      "1/7 = 0.142857142857... (142857 repeats).",
+      "<b>Answer:</b> (B) non-terminating recurring"
+    ]
+  },
+  {
+    title: "25. MCQ: Which of the following is a rational number? (A) π (B) √3 (C) 0.75 (D) √5",
+    steps: [
+      "(A): π (irrational).",
+      "(B): √3 (irrational).",
+      "(C): 0.75 = 3/4 (rational).",
+      "(D): √5 (irrational).",
+      "<b>Answer:</b> (C) 0.75"
+    ]
+  }
+];
+
+function createProblems() {
+  var list = document.getElementById('problems-list');
+  list.innerHTML = "";
+  for (var i = 0; i < problems.length; i++) {
+    var p = problems[i];
+    var li = document.createElement('li');
+    li.className = "problem-card";
+    var html = '<div class="problem-title">' + p.title + '</div>';
+    for (var j = 0; j < p.steps.length; j++) {
+      html += '<div class="step" id="step-' + i + '-' + j + '">' + p.steps[j] + '</div>';
+      html += '<button class="show-step-btn" id="btn-' + i + '-' + j + '" onclick="showStep(' + i + ',' + j + ')"' + (j !== 0 ? ' style="display:none;"' : '') + '>Show Step</button>';
+    }
+    li.innerHTML = html;
+    list.appendChild(li);
+  }
+}
+
+function showStep(i, j) {
+  document.getElementById('step-' + i + '-' + j).className = "step visible";
+  document.getElementById('btn-' + i + '-' + j).style.display = "none";
+  // Show next step button if exists
+  if (j + 1 < problems[i].steps.length) {
+    document.getElementById('btn-' + i + '-' + (j + 1)).style.display = "";
+  }
+}
+
+function resetAll() {
+  for (var i = 0; i < problems.length; i++) {
+    for (var j = 0; j < problems[i].steps.length; j++) {
+      document.getElementById('step-' + i + '-' + j).className = "step";
+      document.getElementById('btn-' + i + '-' + j).style.display = (j === 0 ? "" : "none");
+    }
+  }
+}
+
+function downloadPDF() {
+  var initials = document.getElementById('initials').value;
+  if (!initials) {
+    alert("Please enter your initials for the PDF.");
+    document.getElementById('initials').focus();
+    return;
+  }
+  var doc = new window.jspdf.jsPDF();
+  var y = 14;
+  doc.setFontSize(16);
+  doc.text("Number Systems – Step-by-Step Solutions", 14, y);
+  y += 8;
+  doc.setFontSize(11);
+  doc.text("Initials: " + initials, 14, y);
+  y += 8;
+  var pageHeight = doc.internal.pageSize.height;
+  for (var i = 0; i < problems.length; i++) {
+    var p = problems[i];
+    y += 6;
+    if (y > pageHeight - 20) { doc.addPage(); y = 14; }
+    doc.setFontSize(12);
+    doc.text((i + 1) + ". " + stripHTML(p.title), 14, y);
+    doc.setFontSize(11);
+    for (var j = 0; j < p.steps.length; j++) {
+      y += 6;
+      if (y > pageHeight - 20) { doc.addPage(); y = 14; }
+      doc.text("  Step " + (j + 1) + ": " + stripHTML(p.steps[j]), 16, y);
+    }
+  }
+  doc.save("NumberSystems_Stepwise_Solutions.pdf");
+}
+
+function stripHTML(html) {
+  var tmp = document.createElement("div");
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || "";
+}
+
+createProblems();
+</script>
+</body>
+</html>
