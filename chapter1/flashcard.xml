@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flashcards>
+  <flashcard>
+    <question>What is a rational number?</question>
+    <answer>A number that can be written as p/q, where p and q are integers and q ≠ 0. Example: 3/4, –2, 0.25</answer>
+  </flashcard>
+  <flashcard>
+    <question>What is an irrational number?</question>
+    <answer>A number that cannot be written as p/q; its decimal expansion is non-terminating and non-repeating. Example: √2, π</answer>
+  </flashcard>
+  <flashcard>
+    <question>Can the sum of two irrational numbers be rational?</question>
+    <answer>Yes, sometimes. Example: (2 + √7) + (2 – √7) = 4 (rational)</answer>
+  </flashcard>
+  <flashcard>
+    <question>Can the product of two irrational numbers be rational?</question>
+    <answer>Yes, sometimes. Example: (2 + √7) × (2 – √7) = 4 – 7 = –3 (rational)</answer>
+  </flashcard>
+  <flashcard>
+    <question>What is always the result of adding a rational and an irrational number?</question>
+    <answer>Always irrational. Example: 3 + √2 is irrational.</answer>
+  </flashcard>
+  <flashcard>
+    <question>What is always the result of multiplying a non-zero rational number with an irrational number?</question>
+    <answer>Always irrational. Example: 2 × √3 = 2√3 (irrational)</answer>
+  </flashcard>
+  <flashcard>
+    <question>Is the square of an irrational number always irrational?</question>
+    <answer>No, it can be rational. Example: (√2)^2 = 2 (rational)</answer>
+  </flashcard>
+  <flashcard>
+    <question>Are there infinitely many rational numbers between any two rational numbers?</question>
+    <answer>Yes. Example: Between 1 and 2: 1.1, 1.11, 1.111, etc.</answer>
+  </flashcard>
+  <flashcard>
+    <question>What is the decimal expansion of a rational number like?</question>
+    <answer>Terminating or repeating.</answer>
+  </flashcard>
+  <flashcard>
+    <question>What is the decimal expansion of an irrational number like?</question>
+    <answer>Non-terminating, non-repeating.</answer>
+  </flashcard>
+  <flashcard>
+    <question>Is the sum of two irrational numbers always irrational?</question>
+    <answer>No, it can be rational. Example: (2 + √7) + (2 – √7) = 4 (rational)</answer>
+  </flashcard>
+  <flashcard>
+    <question>Is the product of two irrational numbers always irrational
